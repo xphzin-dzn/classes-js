@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabalho de classes</title>
+</head>
+
+<body>
+    <style>
+        * {
+            font-family: 'Kanit', sans-serif;
+            font-family: 'Open Sans', sans-serif;
+        }
+    </style>
+    <script>
+        class Pessoa {
+            constructor(cpf, nome) {
+                this.cpf = cpf;
+                this.nome = nome;
+            }
+        }
+        class Professor extends Pessoa {
+            constructor(cpf, nome, area, telefone) {
+                super(cpf, nome);
+                this.area = area;
+                this.telefone = telefone;
+            }
+        }
+        class Aluno extends Pessoa {
+            constructor(cpf, nome, matricula) {
+                super(cpf, nome);
+                this.matricula = matricula;
+            }
+        }
+        class Turma {
+            constructor(professor, alunos, identificacao) {
+                this.professor = professor;
+                this.alunos = alunos;
+                this.identificacao = identificacao;
+            }
+
+            imprimeDados() {
+                console.log(`Identificação da Turma: ${this.identificacao}`);
+                console.log(`Professor: ${this.professor.nome}, Área: ${this.professor.area}, Telefone: ${this.professor.telefone}`);
+                console.log('Alunos:');
+                this.alunos.forEach(aluno => {
+                    console.log(`Nome: ${aluno.nome}, Matrícula: ${aluno.matricula}`);
+                });
+            }
+        }
+
+
+        const professor1 = new Professor("123456789", "Telecken", "Front-end", "111-222-333");
+        const professor2 = new Professor("987654321", "Betito", "Banco de dados", "444-555-666");
+        const aluno1 = new Aluno("111111111", "Aluno 1", "A001");
+        const aluno2 = new Aluno("222222222", "Aluno 2", "A002");
+        const aluno3 = new Aluno("333333333", "Aluno 3", "A003");
+        const aluno4 = new Aluno("444444444", "Aluno 4", "A004");
+        const aluno5 = new Aluno("555555555", "Aluno 5", "A005");
+        const aluno6 = new Aluno("666666666", "Aluno 6", "A006");
+        const turma1 = new Turma(professor1, [aluno1, aluno2, aluno3, aluno4], "Turma A");
+        const turma2 = new Turma(professor2, [aluno1, aluno2, aluno5, aluno6], "Turma B");
+        const resultadoDiv = document.createElement("div");
+        resultadoDiv.innerHTML = "<h1>Dados das Turmas</h1>";
+        document.body.appendChild(resultadoDiv);
+
+        function imprimirTurma(turma) {
+            const turmaDiv = document.createElement("div");
+            turmaDiv.innerHTML = `<h2>Identificação da Turma: ${turma.identificacao}</h2>`;
+            turmaDiv.innerHTML += `<p>Professor: ${turma.professor.nome}, Área: ${turma.professor.area}, Telefone: ${turma.professor.telefone}</p>`;
+            turmaDiv.innerHTML += "<p>Alunos:</p>";
+            turma.alunos.forEach(aluno => {
+                turmaDiv.innerHTML += `<p>Nome: ${aluno.nome}, Matrícula: ${aluno.matricula}</p>`;
+            });
+            resultadoDiv.appendChild(turmaDiv);
+        }
+
+        imprimirTurma(turma1);
+        imprimirTurma(turma2);
+    </script>
+</body>
+
+</html>
